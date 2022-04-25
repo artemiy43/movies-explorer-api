@@ -1,5 +1,4 @@
 # movies-explorer-api
 
-IP-адрес:
-
 Домен:
+https://api.movies.bondar.student.nomoredomains.xyz
