@@ -1,7 +1,7 @@
 {
   "name": "movies-explorer-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Бэкенд часть сайта для поиска и сохранения фильмов.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

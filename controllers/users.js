@@ -10,19 +10,34 @@ module.exports.createUser = (req, res, next) => {
   const {
     name, email, password,
   } = req.body;
-  User.findOne({ email })
-    .then((user) => {
-      if (user) {
-        throw new ErrorConflict(`Пользователь с таким email: ${email} уже зарегестрирован`);
-      }
-      return bcrypt.hash(password, 10);
-    })
+  // User.findOne({ email })
+  //   .then((user) => {
+  //     if (user) {
+  //       throw new ErrorConflict(`Пользователь с таким email: ${email} уже зарегестрирован`);
+  //     }
+  //     return bcrypt.hash(password, 10);
+  //   })
+  //   .then((hash) => User.create({
+  //     name, email, password: hash,
+  //   }))
+  //   .then((user) => User.findOne({ _id: user._id }))
+  //   .then((user) => res.send(user))
+  //   .catch(next);
+  bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name, email, password: hash,
     }))
     .then((user) => User.findOne({ _id: user._id }))
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new CastError('Переданы некорректные данные пользователя'));
+      } if (err.code === 11000) {
+        next(new ErrorConflict(`Пользователь с таким email: ${email} уже зарегестрирован`));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports.login = (req, res, next) => {

@@ -5,7 +5,7 @@ const urlExample = /(http|https):\/\/(www\.)?[-a-zA-Z0-9]{1,256}\.[a-zA-Z0-9()]{
 
 const createUserCheck = celebrate({
   [Segments.BODY]: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().custom((value, helper) => {
       if (!validator.isEmail(value)) {
         return helper.message('It is not Email');
@@ -42,7 +42,7 @@ const updateProfileUserCheck = celebrate({
 
 const movieIdCheck = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
-    movieId: Joi.string().required().hex(),
+    movieId: Joi.string().required().hex().length(24),
   }),
 });
 
