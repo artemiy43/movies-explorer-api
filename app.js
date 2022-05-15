@@ -25,8 +25,8 @@ require('dotenv').config();
 const app = express();
 
 const allowedCors = [
-  'https://mesto.artem43.student.nomoredomains.xyz',
-  'http://mesto.artem43.student.nomoredomains.xyz',
+  'https://movies.bondar.student.nomoredomains.xyz',
+  'http://movies.bondar.student.nomoredomains.xyz',
   'localhost:3000',
 ];
 
