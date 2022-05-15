@@ -15,7 +15,7 @@ const app = express();
 const allowedCors = [
   'https://movies.bondar.student.nomoredomains.xyz',
   'http://movies.bondar.student.nomoredomains.xyz',
-  'localhost:3000',
+  'http://localhost:3000',
 ];
 
 app.use((req, res, next) => {
