@@ -1,8 +1,6 @@
 const { celebrate, Joi, Segments } = require('celebrate');
 const validator = require('validator');
 
-const urlExample = /(http|https):\/\/(www\.)?[-a-zA-Z0-9]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%._\\+~#?&//=]*)/;
-
 const createUserCheck = celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -54,19 +52,19 @@ const createMovieCheck = celebrate({
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().required().custom((value, helper) => {
-      if (!urlExample.test(value)) {
+      if (!validator.isURL(value)) {
         return helper.message('It is not url');
       }
       return value;
     }),
     trailerLink: Joi.string().required().custom((value, helper) => {
-      if (!urlExample.test(value)) {
+      if (!validator.isURL(value)) {
         return helper.message('It is not url');
       }
       return value;
     }),
     thumbnail: Joi.string().required().custom((value, helper) => {
-      if (!urlExample.test(value)) {
+      if (!validator.isURL(value)) {
         return helper.message('It is not url');
       }
       return value;

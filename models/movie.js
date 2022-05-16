@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
-const urlExample = /(http|https):\/\/(www\.)?[-a-zA-Z0-9]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%._\\+~#?&//=]*)/;
-// @:%._\\+~#=
 const userSchema = new mongoose.Schema({
   country: {
     type: String,
@@ -28,7 +27,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: { // опишем свойство validate
       validator(v) { // validator - функция проверки данных. v - значение свойства age
-        if (!urlExample.test(v)) {
+        if (!validator.isURL(v)) {
           return false;
         }
         return v;
@@ -41,7 +40,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: { // опишем свойство validate
       validator(v) { // validator - функция проверки данных. v - значение свойства age
-        if (!urlExample.test(v)) {
+        if (!validator.isURL(v)) {
           return false;
         }
         return v;
@@ -54,7 +53,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: { // опишем свойство validate
       validator(v) { // validator - функция проверки данных. v - значение свойства age
-        if (!urlExample.test(v)) {
+        if (!validator.isURL(v)) {
           return false;
         }
         return v;
